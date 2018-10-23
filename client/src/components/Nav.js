@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 
 const Nav = () => {
   const pathName = window.location.pathname;
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-transparent">
+    <nav className="navbar navbar-expand-sm navbar-dark bg-transparent">
       <button
         className="navbar-toggler"
         type="button"
@@ -23,18 +24,18 @@ const Nav = () => {
               active: pathName === '/'
             })}
           >
-            <a className="nav-link" href="/">
+            <Link className="nav-link" to="/">
               Home <span className="sr-only">(current)</span>
-            </a>
+            </Link>
           </li>
           <li
             className={classnames('nav-item', {
               active: pathName === '/saved'
             })}
           >
-            <a className="nav-link" href="/saved">
+            <Link className="nav-link" to="/saved">
               Saved Articles
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
