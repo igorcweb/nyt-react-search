@@ -1,16 +1,42 @@
 import React, { Component } from 'react';
+import API from '../utils/API';
 
 class Search extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: '5' };
+    this.state = {
+      searchParams: {
+        query: null,
+        number: '5',
+        startYear: null,
+        endYear: null
+      }
+    };
   }
 
-  handleChange = e => {
-    this.setState({ value: e.target.value });
+  handleNumberChange = e => {
+    this.setState({
+      searchParams: {
+        number: e.target.value
+      }
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.setState({
+      searchParams: {
+        query: this.refs.query.value,
+        number: this.refs.number.value,
+        startYear: this.refs.startYear.value,
+        endYear: this.refs.endYear.value
+      }
+    });
+    console.log(this.state);
   };
 
   render() {
+    // API.search('trump').then(result => console.log(result.data.response));
     return (
       <div className="row">
         <div className="col-sm-12">
@@ -28,17 +54,19 @@ class Search extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    id="search-trem"
+                    id="query"
+                    ref="query"
                   />
                 </div>
                 <div className="form-group">
                   <label htmlFor="pwd">Number of Records to Retrieve:</label>
                   <select
-                    id="article-count"
+                    id="number"
                     className="custom-select"
                     aria-labelledby="dropdownMenuButton"
-                    value={this.state.value}
-                    onChange={this.handleChange}
+                    value={this.state.searchParams.number}
+                    onChange={this.handleNumberChange}
+                    ref="number"
                   >
                     <option value="1">1</option>
 
@@ -47,14 +75,27 @@ class Search extends Component {
                   </select>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="start-year">Start Year (Optional):</label>
-                  <input type="text" className="form-control" id="start-year" />
+                  <label htmlFor="startYear">Start Year (Optional):</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="startYear"
+                    maxLength="4"
+                    ref="startYear"
+                  />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="end-year">End Year (Optional):</label>
-                  <input type="text" className="form-control" id="end-year" />
+                  <label htmlFor="endYear">End Year (Optional):</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="endYear"
+                    maxLength="4"
+                    ref="endYear"
+                  />
                 </div>
                 <button
+                  onClick={this.handleSubmit}
                   type="submit"
                   className="btn btn-default"
                   id="run-search"

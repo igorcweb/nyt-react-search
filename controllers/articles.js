@@ -1,39 +1,17 @@
-const express = require('express');
-const router = express.Router();
-const Article = require('../models/Article');
+const router = require('express').Router();
+const articlesController = require('./articlesController');
 
-//Display articles
-router.get('/', (req, res) => {
-  Article.find({ saved: false })
-    .then(articles => {
-      res.json(articles);
-    })
-    .catch(err => res.json({ error: err }));
-});
+//Route: /api/articles"
+router
+  .route('/')
+  .get(articlesController.findAll)
+  .post(articlesController.create);
 
-//Display saved articles
-router.get('/saved', (req, res) => {
-  Article.find({ saved: true })
-    .then(articles => {
-      res.json(articles);
-    })
-    .catch(err => res.json({ error: err }));
-});
-
-//Save article
-router.post('/:id', (req, res) => {
-  const _id = req.params.id;
-  Article.findByIdAndUpdate({ _id }, { $set: { saved: true } })
-    .then(() => res.send('saved'))
-    .catch(err => console.log(err));
-});
-
-//Remove from saved
-router.post('/remove/:id', (req, res) => {
-  const _id = req.params.id;
-  Article.findByIdAndUpdate({ _id }, { $set: { saved: false } })
-    .then(() => res.send('removed'))
-    .catch(err => console.log(err));
-});
+// Route: /api/articles/:id"
+router
+  .route('/:id')
+  .get(articlesController.findById)
+  .put(articlesController.update)
+  .delete(articlesController.remove);
 
 module.exports = router;
