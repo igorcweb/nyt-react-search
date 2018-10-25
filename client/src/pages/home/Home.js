@@ -6,8 +6,8 @@ import API from '../../utils/API';
 class Home extends Component {
   state = {
     topic: '',
-    sYear: '',
-    eYear: '',
+    startYear: '',
+    endYear: '',
     page: '0',
     results: [],
     previousSearch: {},
@@ -102,7 +102,7 @@ class Home extends Component {
           handleSubmit={this.handleSubmit}
           state={this.state}
         />
-        <Articles />
+        <Articles state={this.state} saveArticle={this.saveArticle} />
       </React.Fragment>
     );
   }
