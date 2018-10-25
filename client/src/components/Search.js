@@ -1,42 +1,9 @@
 import React, { Component } from 'react';
-import API from '../utils/API';
 
 class Search extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchParams: {
-        query: null,
-        number: '5',
-        startYear: null,
-        endYear: null
-      }
-    };
-  }
-
-  handleNumberChange = e => {
-    this.setState({
-      searchParams: {
-        number: e.target.value
-      }
-    });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.setState({
-      searchParams: {
-        query: this.refs.query.value,
-        number: this.refs.number.value,
-        startYear: this.refs.startYear.value,
-        endYear: this.refs.endYear.value
-      }
-    });
-    console.log(this.state);
-  };
-
   render() {
     // API.search('trump').then(result => console.log(result.data.response));
+    console.log(this);
     return (
       <div className="row">
         <div className="col-sm-12">
@@ -54,48 +21,39 @@ class Search extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    id="query"
-                    ref="query"
+                    id="topic"
+                    name="topic"
+                    value={this.props.state.topic}
+                    onChange={this.props.handleInputChange}
                   />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="pwd">Number of Records to Retrieve:</label>
-                  <select
-                    id="number"
-                    className="custom-select"
-                    aria-labelledby="dropdownMenuButton"
-                    value={this.state.searchParams.number}
-                    onChange={this.handleNumberChange}
-                    ref="number"
-                  >
-                    <option value="1">1</option>
-
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                  </select>
                 </div>
                 <div className="form-group">
                   <label htmlFor="startYear">Start Year (Optional):</label>
                   <input
-                    type="text"
+                    type="date"
                     className="form-control"
                     id="startYear"
                     maxLength="4"
-                    ref="startYear"
+                    name="startYear"
+                    onChange={this.props.handleInputChange}
+                    value={this.props.state.startYear}
                   />
                 </div>
                 <div className="form-group">
                   <label htmlFor="endYear">End Year (Optional):</label>
                   <input
-                    type="text"
+                    type="date"
                     className="form-control"
                     id="endYear"
                     maxLength="4"
-                    ref="endYear"
+                    name="endYear"
+                    onChange={this.props.handleInputChange}
+                    value={this.props.state.endYear}
                   />
                 </div>
                 <button
-                  onClick={this.handleSubmit}
+                  disabled={!this.props.state.topic}
+                  onClick={this.props.handleSubmit}
                   type="submit"
                   className="btn btn-default"
                   id="run-search"
