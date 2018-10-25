@@ -55,7 +55,7 @@ class Search extends Component {
                   disabled={!this.props.state.topic}
                   onClick={this.props.handleSubmit}
                   type="submit"
-                  className="btn btn-default"
+                  className="btn btn-default mr-2"
                   id="run-search"
                 >
                   <i className="fa fa-search" /> Search

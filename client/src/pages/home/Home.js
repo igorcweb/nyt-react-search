@@ -1,33 +1,33 @@
 import React, { Component } from 'react';
-import Search from '../components/Search';
-import Articles from '../components/Articles';
-import API from '../utils/API';
+import Search from '../../components/Search';
+import Articles from '../../components/Articles';
+import API from '../../utils/API';
 
 class Home extends Component {
-  constructor() {
-    super();
-    this.state = {
-      topic: '',
-      startYear: '',
-      endYear: '',
-      articles: []
-    };
-  }
+  state = {
+    topic: '',
+    sYear: '',
+    eYear: '',
+    page: '0',
+    results: [],
+    previousSearch: {},
+    noResults: false
+  };
 
   saveArticle = article => {
-    const newArticle = {
+    let newArticle = {
       date: article.pub_date,
       title: article.headline.main,
       url: article.web_url,
-      description: article.snippet
+      summary: article.snippet
     };
 
     API.saveArticle(newArticle)
       .then(() => {
-        const articles = this.state.results.filter(
+        let unsavedArticles = this.state.results.filter(
           article => article.headline.main !== newArticle.title
         );
-        this.setState({ articles });
+        this.setState({ results: unsavedArticles });
       })
       .catch(err => console.log(err));
   };
@@ -40,15 +40,23 @@ class Home extends Component {
   handleSubmit = e => {
     e.preventDefault();
     let { topic, startYear, endYear } = this.state;
-    const query = { topic, startYear, endYear };
+    let query = { topic, startYear, endYear };
     this.getArticles(query);
   };
 
   getArticles = query => {
-    this.setState({ articles: [] });
+    if (
+      query.topic !== this.state.previousSearch.topic ||
+      query.eYear !== this.state.previousSearch.eYear ||
+      query.sYear !== this.state.previousSearch.sYear
+    ) {
+      this.setState({ results: [] });
+    }
     let { topic, startYear, endYear } = query;
 
-    let queryUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?sort=newest`;
+    let queryUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?sort=newest&page=${
+      this.state.page
+    }`;
     let key = `&api-key=${process.env.REACT_APP_API_KEY}`;
 
     if (topic.indexOf(' ') >= 0) {
@@ -67,18 +75,26 @@ class Home extends Component {
 
     API.search(queryUrl)
       .then(results => {
-        this.setState({
-          articles: [...this.state.results, ...results.data.response.docs],
-          topic: '',
-          startYear: '',
-          endYear: ''
-        });
+        this.setState(
+          {
+            results: [...this.state.results, ...results.data.response.docs],
+            previousSearch: query,
+            topic: '',
+            sYear: '',
+            eYear: ''
+          },
+          function() {
+            this.state.results.length === 0
+              ? this.setState({ noResults: true })
+              : this.setState({ noResults: false });
+          }
+        );
       })
       .catch(err => console.log(err));
   };
 
   render() {
-    // console.log('this', this.handleInputChange);
+    console.log(this);
     return (
       <React.Fragment>
         <Search

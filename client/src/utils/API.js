@@ -1,19 +1,20 @@
 import axios from 'axios';
 
-// const { REACT_APP_API_KEY } = process.env;
-// const url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?';
-
-// const API = {
-//   search: query => {
-//     return axios.get(`${url}api-key=${REACT_APP_API_KEY}&q=${query}`);
-//   }
-// };
-const API = {
-  getArticles: () => axios.get('api/articles'),
-  getArticle: id => axios.get('api/articles' + id),
-  deleteArticle: id => axios.delete('api/articles' + id),
-  saveArticle: article => axios.post('api/articles' + article),
-  search: queryUrl => axios.get(queryUrl)
+//abstracted API methods
+export default {
+  getArticles: function() {
+    return axios.get('/api/articles');
+  },
+  getArticle: function(id) {
+    return axios.get('/api/articles/' + id);
+  },
+  deleteArticle: function(id) {
+    return axios.delete('/api/articles/' + id);
+  },
+  saveArticle: function(articleData) {
+    return axios.post('/api/articles', articleData);
+  },
+  search: function(queryUrl) {
+    return axios.get(queryUrl);
+  }
 };
-
-export default API;

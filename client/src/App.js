@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Title from './components/Title';
-import Home from './pages/Home';
-import Saved from './pages/Saved';
+import Home from './pages/home';
+import Saved from './pages/saved';
 import Footer from './components/Footer';
 import './App.css';
 
