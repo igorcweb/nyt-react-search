@@ -24,7 +24,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
-mongoose.Promise = Promise;
+mongoose.Promise = global.Promise;
 mongoose
   .connect(
     process.env.MONGODB_URI || 'mongodb://localhost/nyt-react-search',
