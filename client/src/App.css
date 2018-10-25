@@ -17,6 +17,10 @@
   color: #fff !important;
 }
 
+.btn-blue:hover {
+  background-color: #2b4480 !important;
+}
+
 nav {
   margin-top: -20px;
   margin-bottom: 40px;

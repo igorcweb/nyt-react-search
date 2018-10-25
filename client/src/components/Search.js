@@ -28,7 +28,7 @@ class Search extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="startYear">Start Year (Optional):</label>
+                  <label htmlFor="startYear">Start Date (Optional):</label>
                   <input
                     type="date"
                     className="form-control"
@@ -40,7 +40,7 @@ class Search extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="endYear">End Year (Optional):</label>
+                  <label htmlFor="endYear">End Date (Optional):</label>
                   <input
                     type="date"
                     className="form-control"
