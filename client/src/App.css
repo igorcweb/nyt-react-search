@@ -32,7 +32,7 @@ nav {
 }
 
 div.content {
-  min-height: calc(100vh - 32px);
+  min-height: calc(100vh - 52px);
 }
 
 /* Small devices (landscape phones, 576px and up) */
