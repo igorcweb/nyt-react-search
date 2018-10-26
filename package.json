@@ -2,6 +2,7 @@
   "name": "nyt-react-search",
   "version": "1.0.0",
   "main": "server.js",
+  "homepage": "https://igorcweb-nrc.herokuapp.com",
   "scripts": {
     "start": "if-env NODE_ENV=production && yarn start:prod || yarn start:dev",
     "start:prod": "node server.js",
