@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Title from './components/Title';
-import Home from './pages/home';
-import Saved from './pages/saved';
+import Home from './pages/Home';
+import Saved from './pages/Saved';
 import Footer from './components/Footer';
 import './App.css';
 
@@ -11,9 +11,11 @@ class App extends Component {
     return (
       <Router>
         <div className="App container">
-          <Title />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/saved" component={Saved} />
+          <div className="content">
+            <Title />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/saved" component={Saved} />
+          </div>
           <Footer />
         </div>
       </Router>

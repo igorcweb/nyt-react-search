@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Search from '../../components/Search';
-import Articles from '../../components/Articles';
-import API from '../../utils/API';
+import Search from '../components/Search';
+import Articles from '../components/Articles';
+import API from '../utils/API';
 
 class Home extends Component {
   state = {

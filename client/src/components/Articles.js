@@ -21,8 +21,8 @@ const Articles = props => {
                 url={article.web_url}
                 summary={article.snippet}
                 date={article.pub_date}
+                onClick={() => props.saveArticle(article)}
                 type="Save"
-                onClick={() => this.saveArticle(article)}
               />
             ))}
           </div>

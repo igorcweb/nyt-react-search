@@ -12,7 +12,7 @@ export const Article = props => (
     >
       <div className="d-flex w-100 justify-content-between">
         <h5 className="mb-1">{props.title}</h5>
-        <small>{moment(props.date).format('dddd, MMMM Do YYYY, h:mm')}</small>
+        <small>{moment(props.date).format('MMMM Do, YYYY')}</small>
       </div>
     </a>
     <List className="list-group-item">
