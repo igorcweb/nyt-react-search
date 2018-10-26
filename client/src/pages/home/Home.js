@@ -44,6 +44,10 @@ class Home extends Component {
     this.getArticles(query);
   };
 
+  clearArticles = () => {
+    this.setState({ results: [] });
+  };
+
   getArticles = query => {
     if (
       query.topic !== this.state.previousSearch.topic ||
@@ -101,6 +105,7 @@ class Home extends Component {
           handleInputChange={this.handleInputChange}
           handleSubmit={this.handleSubmit}
           state={this.state}
+          clearArticles={this.clearArticles}
         />
         <Articles state={this.state} saveArticle={this.saveArticle} />
       </React.Fragment>

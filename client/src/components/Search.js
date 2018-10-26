@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 class Search extends Component {
   render() {
-    // API.search('trump').then(result => console.log(result.data.response));
     console.log(this.props);
     return (
       <div className="row">
@@ -60,7 +59,11 @@ class Search extends Component {
                 >
                   <i className="fa fa-search" /> Search
                 </button>
-                <button className="btn btn-default" id="clear-all">
+                <button
+                  className="btn btn-default"
+                  id="clear-all"
+                  onChange={this.props.clearArticles}
+                >
                   <i className="fa fa-trash" /> Clear Results
                 </button>
               </form>
