@@ -98,7 +98,6 @@ class Home extends Component {
   };
 
   render() {
-    console.log(this);
     return (
       <React.Fragment>
         <Search
